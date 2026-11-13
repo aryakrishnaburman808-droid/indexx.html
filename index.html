@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sameer’s Birthday Universe ✦</title>
+<style>
+*{box-sizing:border-box}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:#080817;color:#f8f4ff;font-family:system-ui,Segoe UI,sans-serif;overflow-x:hidden}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.app{position:relative;z-index:1;max-width:950px;margin:auto;padding:20px 16px 55px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid #ffffff20}
+.brand{color:#ffd879;font-weight:900;letter-spacing:2px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap}
+.tabs button{border:1px solid #ffffff25;background:#ffffff0a;color:#d8d9ed;padding:9px 13px;border-radius:30px;cursor:pointer}
+.tabs button.on{background:#ffd879;color:#151323;font-weight:800}
+.page{display:none;animation:appear .6s}
+.page.on{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.center{text-align:center}
+.kicker{margin-top:42px;color:#ffca75;letter-spacing:4px;font-size:12px;text-transform:uppercase}
+h1{font:clamp(45px,10vw,95px)/.98 Georgia,serif;margin:18px 0;background:linear-gradient(120deg,#fff,#ffd879,#ff9ed0);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font:clamp(30px,6vw,52px) Georgia,serif;color:#ffd879;margin:16px 0}
+.muted{color:#adb4d0}
+.glass{max-width:740px;margin:25px auto;padding:clamp(20px,5vw,36px);border:1px solid #ffffff22;border-radius:28px;background:linear-gradient(135deg,#ffffff13,#ffffff04);box-shadow:0 22px 80px #0005;backdrop-filter:blur(12px)}
+p{line-height:1.85;color:#e2e5f5}
+.gold{color:#ffd879}
+.btn{border:0;border-radius:30px;padding:13px 20px;margin:5px;font-weight:800;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-3px) scale(1.02)}
+.primary{background:linear-gradient(135deg,#ffe8a8,#e6a63d);color:#21172a}
+.secondary{background:#ffffff10;border:1px solid #ffffff30;color:#fff}
+.heroCake{font-size:80px;display:inline-block;filter:drop-shadow(0 0 24px #ffc95760);animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-13px) rotate(4deg)}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.box{background:#ffffff0a;border:1px solid #ffffff20;border-radius:20px;padding:20px}
+.box .emoji{font-size:35px}
+.box h3{color:#ffd879;margin:8px 0}
+.secret{display:none;color:#ffc8e4;font-size:20px;padding:16px}
+.secret.show{display:block;animation:appear .5s}
+.progress{height:4px;background:#ffffff15;margin:17px 0;border-radius:5px}
+.progress i{display:block;height:100%;width:25%;background:linear-gradient(90deg,#ffd879,#ff9ed0);transition:.3s;border-radius:5px}
+footer{text-align:center;color:#717995;font-size:12px;margin-top:28px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fff0c5;color:#20172a;padding:12px 18px;border-radius:25px;font-weight:800;z-index:9;display:none}
+@keyframes up{to{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+@media(max-width:500px){.app{padding:15px}.kicker{margin-top:30px}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="app">
+<header>
+ <div class="brand">✦ SAMEER’S UNIVERSE</div>
+ <div class="tabs">
+  <button class="on" onclick="page(0)">Home</button>
+  <button onclick="page(1)">Letter 💌</button>
+  <button onclick="page(2)">Memories 📸</button>
+  <button onclick="page(3)">Wishes 🌠</button>
+ </div>
+</header>
+<div class="progress"><i id="progress"></i></div>
+
+<section class="page on center" id="p0">
+ <div class="kicker">A tiny universe made just for you</div>
+ <div class="heroCake">🎂</div>
+ <h1>Happy Birthday<br>Sameer!</h1>
+ <p class="muted">Your day. Your spotlight. Your little surprise. ✨</p>
+ <div class="glass">
+  <p>Today deserves more than just a “happy birthday” text… so here’s a whole mini universe for you! 🌌</p>
+  <button class="btn primary" onclick="page(1)">Open your birthday letter →</button>
+ </div>
+ <button class="btn secondary" onclick="party()">🎊 Make it rain confetti</button>
+</section>
+
+<section class="page center" id="p1">
+ <div class="kicker">01 / A message from me</div>
+ <h2>Dear Sameer 💌</h2>
+ <div class="glass">
+  <p>Happy Birthday to a truly amazing friend! 💛</p>
+  <p>I hope this year gives you countless reasons to smile, courage to chase every dream, and people who always bring out the best in you.</p>
+  <p>Thank you for all the laughs, random conversations, and memories. Keep being your cheerful, kind, slightly crazy self (that’s part of the charm 😄).</p>
+  <p class="gold">You deserve a beautiful year ahead. Always rooting for you!</p>
+  <p style="text-align:right">— Your friend ♡</p>
+  <button class="btn primary" onclick="toggle('secret1')">One secret line… 🤫</button>
+  <div class="secret" id="secret1">You’re one of those friends I’m really glad I met. 🫶</div>
+ </div>
+ <button class="btn secondary" onclick="page(0)">← Home</button>
+ <button class="btn primary" onclick="page(2)">Next: memories →</button>
+</section>
+
+<section class="page center" id="p2">
+ <div class="kicker">02 / The friendship gallery</div>
+ <h2>Little things, big smiles 📸</h2>
+ <div class="glass">
+  <div class="grid">
+   <div class="box"><div class="emoji">😂</div><h3>Laughs</h3><p>May your days be full of jokes that never get old.</p></div>
+   <div class="box"><div class="emoji">🤝</div><h3>Friendship</h3><p>Here’s to always having each other’s back.</p></div>
+   <div class="box"><div class="emoji">🎶</div><h3>Good vibes</h3><p>More songs, silly moments &amp; happy memories.</p></div>
+   <div class="box"><div class="emoji">🌃</div><h3>Late talks</h3><p>More random chats that somehow mean a lot.</p></div>
+  </div>
+  <p class="muted">No photos needed—just memories waiting to happen. 💫</p>
+  <button class="btn primary" onclick="toggle('secret2')">Unlock memory card 🎁</button>
+  <div class="secret" id="secret2">📷 <b>Next memory:</b> our next unforgettable adventure!</div>
+ </div>
+ <button class="btn secondary" onclick="page(1)">← Letter</button>
+ <button class="btn primary" onclick="page(3)">Next: wishes →</button>
+</section>
+
+<section class="page center" id="p3">
+ <div class="kicker">03 / Sending good things your way</div>
+ <h2>Three wishes for you 🌠</h2>
+ <div class="glass">
+  <div class="grid">
+   <div class="box"><div class="emoji">😊</div><h3>Happiness</h3><p>May joy find you every day.</p></div>
+   <div class="box"><div class="emoji">🚀</div><h3>Success</h3><p>May your hard work take you far.</p></div>
+   <div class="box"><div class="emoji">🌈</div><h3>Magic</h3><p>May life surprise you beautifully.</p></div>
+  </div>
+  <div style="font-size:65px;margin:20px">🕯️🎂🕯️</div>
+  <button class="btn primary" onclick="wish()">Make a birthday wish ✨</button>
+  <div class="secret" id="final">Wish launched into the universe! 💫<br><br><b>Happy Birthday, Sameer! Keep shining! 💛</b></div>
+ </div>
+ <button class="btn secondary" onclick="page(2)">← Memories</button>
+ <button class="btn primary" onclick="page(0)">↻ Replay surprise</button>
+</section>
+
+<footer>Made with friendship, sparkles &amp; a little extra love ♡</footer>
+</div>
+<div id="toast">✨ Birthday magic activated!</div>
+
+<script>
+function page(n){
+ document.querySelectorAll('.page').forEach((e,i)=>e.classList.toggle('on',i===n));
+ document.querySelectorAll('.tabs button').forEach((e,i)=>e.classList.toggle('on',i===n));
+ document.getElementById('progress').style.width=((n+1)*25)+'%';
+ scrollTo({top:0,behavior:'smooth'});
+ if(n===3)party();
+}
+function toggle(id){document.getElementById(id).classList.toggle('show')}
+function wish(){
+ document.getElementById('final').classList.add('show');
+ party();hearts();toast();
+}
+function toast(){
+ var t=document.getElementById('toast');
+ t.style.display='block';
+ setTimeout(function(){t.style.display='none'},2200);
+}
+function party(){
+ for(var i=0;i<100;i++){
+  (function(i){
+   var e=document.createElement('span');
+   e.textContent=['✨','🎉','💛','🎊','💖'][i%5];
+   e.style.cssText='position:fixed;z-index:8;left:'+Math.random()*100+'vw;top:'+Math.random()*40+'vh;font-size:'+(12+Math.random()*23)+'px;pointer-events:none;transition:transform 1.6s ease,opacity 1.6s';
+   document.body.append(e);
+   requestAnimationFrame(function(){
+    e.style.transform='translate('+((Math.random()-.5)*220)+'px,'+(180+Math.random()*400)+'px) rotate('+Math.random()*360+'deg)';
+    e.style.opacity=0;
+   });
+   setTimeout(function(){e.remove()},1700);
+  })(i);
+ }
+}
+function hearts(){
+ for(var i=0;i<16;i++){
+  var e=document.createElement('span');
+  e.textContent='💗';
+  e.style.cssText='position:fixed;bottom:-40px;left:'+Math.random()*100+'vw;z-index:8;font-size:24px;pointer-events:none;animation:up '+(4+Math.random()*3)+'s linear forwards';
+  document.body.append(e);
+  (function(el){setTimeout(function(){el.remove()},7000)})(e);
+ }
+}
+var cv=document.getElementById('bg'),ctx=cv.getContext('2d'),stars=[];
+function resize(){
+ cv.width=innerWidth;
+ cv.height=innerHeight;
+ stars=Array.from({length:110},function(){return{
+  x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.5,a:Math.random()
+ }});
+}
+resize();
+onresize=resize;
+function draw(){
+ ctx.clearRect(0,0,cv.width,cv.height);
+ stars.forEach(function(s){
+  ctx.fillStyle='rgba(255,220,160,'+(.2+s.a*.6)+')';
+  ctx.beginPath();
+  ctx.arc(s.x,s.y,s.r,0,7);
+  ctx.fill();
+ });
+ requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
